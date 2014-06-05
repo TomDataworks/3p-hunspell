@@ -37,6 +37,17 @@ pushd "$HUNSPELL_SOURCE_DIR"
             cp src/win_api/Debug_dll/libhunspell/libhunspell{.dll,.lib,.pdb} "$stage/lib/debug"
             cp src/win_api/Release_dll/libhunspell/libhunspell{.dll,.lib,.pdb} "$stage/lib/release"
         ;;
+        "windows64")
+            load_vsvars
+
+            build_sln "src/win_api/hunspell.sln" "Debug_dll|x64"
+            build_sln "src/win_api/hunspell.sln" "Release_dll|x64"
+
+            mkdir -p "$stage/lib/debug"
+            mkdir -p "$stage/lib/release"
+            cp src/win_api/x64/Debug_dll/libhunspell{.dll,.lib,.pdb} "$stage/lib/debug"
+            cp src/win_api/x64/Release_dll/libhunspell{.dll,.lib,.pdb} "$stage/lib/release"
+        ;;
         "darwin")
             opts='-arch i386 -iwithsysroot /Developer/SDKs/MacOSX10.5.sdk -mmacosx-version-min=10.5'
             export CFLAGS="$opts"
