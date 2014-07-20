@@ -49,7 +49,8 @@ pushd "$HUNSPELL_SOURCE_DIR"
             cp src/win_api/x64/Release_dll/libhunspell{.dll,.lib,.pdb} "$stage/lib/release"
         ;;
         "darwin")
-            opts='-arch i386 -iwithsysroot /Developer/SDKs/MacOSX10.5.sdk -mmacosx-version-min=10.5'
+            DEVELOPER=$(xcode-select --print-path)
+            opts='-arch i386 -arch x86_64 -iwithsysroot ${DEVELOPER}/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk -mmacosx-version-min=10.7'
             export CFLAGS="$opts"
             export CXXFLAGS="$opts"
             export LDFLAGS="$opts"
