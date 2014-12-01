@@ -72,6 +72,17 @@ pushd "$HUNSPELL_SOURCE_DIR"
             mkdir -p "$stage/lib"
             mv "$stage/release" "$stage/lib"
         ;;
+        "linux64")
+            CFLAGS="-m64 -Og -g" CXXFLAGS="-m64 -Og -g -std=c++11" ./configure --with-pic --prefix="$stage" --libdir="$stage/lib/debug"
+            make
+            make install
+
+            make distclean
+
+            CFLAGS="-m64 -O3" CXXFLAGS="-m64 -O3 -std=c++11" ./configure --with-pic --prefix="$stage" --libdir="$stage/lib/release"
+            make
+            make install
+        ;;
     esac
     mkdir -p "$stage/include/hunspell"
     cp src/hunspell/{*.h,*.hxx} "$stage/include/hunspell"
