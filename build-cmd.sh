@@ -7,6 +7,7 @@ set -x
 # make errors fatal
 set -e
 
+HUNSPELL_VERSION="1.3.3"
 HUNSPELL_SOURCE_DIR="hunspell"
 
 if [ -z "$AUTOBUILD" ] ; then 
@@ -23,6 +24,9 @@ eval "$("$AUTOBUILD" source_environment)"
 set -x
 
 stage="$(pwd)/stage"
+
+echo "${HUNSPELL_VERSION}" > "${stage}/VERSION.txt"
+
 pushd "$HUNSPELL_SOURCE_DIR"
     case "$AUTOBUILD_PLATFORM" in
         "windows")
