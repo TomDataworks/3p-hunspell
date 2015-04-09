@@ -69,23 +69,34 @@ pushd "$HUNSPELL_SOURCE_DIR"
             popd
         ;;
         "linux")
-            CFLAGS="-m32" CXXFLAGS="-m32" ./configure --prefix="$stage"
-            make
-            make install
-            mv "$stage/lib" "$stage/release"
-            mkdir -p "$stage/lib"
-            mv "$stage/release" "$stage/lib"
-        ;;
-        "linux64")
-            CFLAGS="-m64 -Og -g" CXXFLAGS="-m64 -Og -g -std=c++11" ./configure --with-pic --prefix="$stage" --libdir="$stage/lib/debug"
-            make
+            JOBS=`cat /proc/cpuinfo | grep processor | wc -l`
+            HARDENED="-fstack-protector-strong -D_FORTIFY_SOURCE=2"
+            CFLAGS="-m32 -Og -g" CXXFLAGS="-m32 -Og -g -std=c++11" ./configure --with-pic --prefix="$stage" --libdir="$stage/lib/debug"
+            make -j$JOBS
             make install
 
             make distclean
 
-            CFLAGS="-m64 -O3" CXXFLAGS="-m64 -O3 -std=c++11" ./configure --with-pic --prefix="$stage" --libdir="$stage/lib/release"
-            make
+            CFLAGS="-m32 -O3 -g $HARDENED" CXXFLAGS="-m32 -O3 -g $HARDENED -std=c++11" ./configure --with-pic --prefix="$stage" --libdir="$stage/lib/release"
+            make -j$JOBS
             make install
+
+            make distclean
+        ;;
+        "linux64")
+            JOBS=`cat /proc/cpuinfo | grep processor | wc -l`
+            HARDENED="-fstack-protector-strong -D_FORTIFY_SOURCE=2"
+            CFLAGS="-m64 -Og -g" CXXFLAGS="-m64 -Og -g -std=c++11" ./configure --with-pic --prefix="$stage" --libdir="$stage/lib/debug"
+            make -j$JOBS
+            make install
+
+            make distclean
+
+            CFLAGS="-m64 -O3 -g $HARDENED" CXXFLAGS="-m64 -O3 -g $HARDENED -std=c++11" ./configure --with-pic --prefix="$stage" --libdir="$stage/lib/release"
+            make -j$JOBS
+            make install
+
+            make distclean
         ;;
     esac
     mkdir -p "$stage/include/hunspell"
