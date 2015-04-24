@@ -53,7 +53,7 @@ pushd "$HUNSPELL_SOURCE_DIR"
         ;;
         "darwin")
             DEVELOPER=$(xcode-select --print-path)
-            opts='-arch i386 -arch x86_64 -iwithsysroot ${DEVELOPER}/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk -mmacosx-version-min=10.7'
+            opts='-arch i386 -arch x86_64 -iwithsysroot ${DEVELOPER}/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.10.sdk -mmacosx-version-min=10.8'
 			export CC="clang"
             export CXX="clang++ -stdlib=libc++ -std=c++11"
             export CFLAGS="$opts"
