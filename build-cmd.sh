@@ -32,8 +32,8 @@ pushd "$HUNSPELL_SOURCE_DIR"
         "windows")
             load_vsvars
 
-            build_sln "src/win_api/hunspell.sln" "Debug_dll|Win32" "libhunspell"
-            build_sln "src/win_api/hunspell.sln" "Release_dll|Win32" "libhunspell"
+            build_sln "src/win_api/hunspell.sln" "Debug_dll" "Win32" "libhunspell"
+            build_sln "src/win_api/hunspell.sln" "Release_dll" "Win32" "libhunspell"
 
             mkdir -p "$stage/lib/debug"
             mkdir -p "$stage/lib/release"
@@ -43,8 +43,8 @@ pushd "$HUNSPELL_SOURCE_DIR"
         "windows64")
             load_vsvars
 
-            build_sln "src/win_api/hunspell.sln" "Debug_dll|x64" "libhunspell"
-            build_sln "src/win_api/hunspell.sln" "Release_dll|x64" "libhunspell"
+            build_sln "src/win_api/hunspell.sln" "Debug_dll" "x64" "libhunspell"
+            build_sln "src/win_api/hunspell.sln" "Release_dll" "x64" "libhunspell"
 
             mkdir -p "$stage/lib/debug"
             mkdir -p "$stage/lib/release"
