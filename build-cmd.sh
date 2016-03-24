@@ -70,7 +70,7 @@ pushd "$HUNSPELL_SOURCE_DIR"
         ;;
         "linux")
             JOBS=`cat /proc/cpuinfo | grep processor | wc -l`
-            HARDENED="-fstack-protector-strong -D_FORTIFY_SOURCE=2"
+            HARDENED="-fstack-protector -D_FORTIFY_SOURCE=2"
             CFLAGS="-m32 -Og -g" CXXFLAGS="-m32 -Og -g -std=c++11" ./configure --with-pic --prefix="$stage" --libdir="$stage/lib/debug"
             make -j$JOBS
             make install
@@ -85,7 +85,7 @@ pushd "$HUNSPELL_SOURCE_DIR"
         ;;
         "linux64")
             JOBS=`cat /proc/cpuinfo | grep processor | wc -l`
-            HARDENED="-fstack-protector-strong -D_FORTIFY_SOURCE=2"
+            HARDENED="-fstack-protector -D_FORTIFY_SOURCE=2"
             CFLAGS="-m64 -Og -g" CXXFLAGS="-m64 -Og -g -std=c++11" ./configure --with-pic --prefix="$stage" --libdir="$stage/lib/debug"
             make -j$JOBS
             make install
