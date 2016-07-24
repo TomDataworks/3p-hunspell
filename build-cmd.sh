@@ -7,7 +7,7 @@ set -x
 # make errors fatal
 set -e
 
-HUNSPELL_VERSION="1.3.3"
+HUNSPELL_VERSION="1.4.1"
 HUNSPELL_SOURCE_DIR="hunspell"
 
 if [ -z "$AUTOBUILD" ] ; then 
