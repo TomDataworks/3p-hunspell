@@ -55,7 +55,7 @@ pushd "$HUNSPELL_SOURCE_DIR"
             DEVELOPER=$(xcode-select --print-path)
             opts='-arch i386 -arch x86_64 -iwithsysroot ${DEVELOPER}/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk -mmacosx-version-min=10.8'
 			export CC="clang"
-            export CXX="clang++ -stdlib=libc++ -std=c++11"
+            export CXX="clang++ -stdlib=libc++ -std=c++14"
             export CFLAGS="$opts"
             export CXXFLAGS="$opts"
             export LDFLAGS="$opts -stdlib=libc++"
@@ -65,7 +65,7 @@ pushd "$HUNSPELL_SOURCE_DIR"
             mkdir -p "$stage/lib/release"
             mv "$stage/lib/"{*.a,*.dylib,*.alias} "$stage/lib/release"
             pushd "$stage/lib/release"
-              fix_dylib_id libhunspell-1.3.0.dylib
+              fix_dylib_id "libhunspell-${HUNSPELL_VERSION}.dylib"
             popd
         ;;
         "linux")
