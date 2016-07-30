@@ -63,7 +63,7 @@
           </map>
           <key>manifest</key>
           <array>
-            <string>lib/release/libhunspell-1.3.a</string>
+            <string>lib/release/libhunspell*.a</string>
           </array>
           <key>name</key>
           <string>darwin</string>
