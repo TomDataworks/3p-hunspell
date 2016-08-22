@@ -1148,7 +1148,7 @@ int Hunspell::suggest(char*** slst, const char* word) {
   rl = (pAMgr) ? pAMgr->get_oconvtable() : NULL;
   for (int j = 0; rl && j < ns; j++) {
     std::string wspace;
-    if (rl->conv((*slst)[j], wspace) > 0) {
+    if (rl->conv((*slst)[j], wspace)) {
       free((*slst)[j]);
       (*slst)[j] = mystrdup(wspace.c_str());
     }
